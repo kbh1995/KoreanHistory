@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="history">
+	
+	<select id="list" resultType="HistoryVO">
+		SELECT * FROM SUMMARY 
+		ORDER BY SUM_YEAR ASC, SUM_TITLE ASC
+	</select>
+	
+	<insert id="add">
+		INSERT INTO SUMMARY 
+		VALUES (
+		SUM_NO_SEQ.NEXTVAL,
+		#{SUM_YEAR},		
+		#{SUM_TITLE},
+		#{SUM_CONTENT},
+		#{SUM_PERSON},
+		#{SUM_RESULT},
+		#{KING}	
+		)
+	</insert>
+	
+	<select id="selectItem" resultType="HistoryVO">
+		SELECT * FROM SUMMARY
+		WHERE SUM_NO = #{SUM_NO}
+	</select>
+	
+	
+	<update id="update">
+		UPDATE SUMMARY 
+		SET SUM_YEAR = #{SUM_YEAR},
+			SUM_TITLE = #{SUM_TITLE},
+			SUM_CONTENT = #{SUM_CONTENT},
+			SUM_PERSON = #{SUM_PERSON},
+			SUM_RESULT = #{SUM_RESULT},
+			KING = #{KING}
+		WHERE SUM_NO = #{SUM_NO}
+	</update>
+	
+	
+	<delete id="delete">
+		DELETE FROM SUMMARY
+		WHERE SUM_NO = #{SUM_NO}
+	</delete> 
+		
+</mapper>
